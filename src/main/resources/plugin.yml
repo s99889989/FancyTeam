@@ -1,0 +1,12 @@
+name: FancyTeam
+version: @version@
+main: com.daxton.fancyteam.FancyTeam
+api-version: 1.13
+prefix: FancyTeam
+softdepend: [FancyCore]
+authors: [ s99889989 ]
+description: team
+commands:
+  fancyteam:
+    description: Basic instructions.
+    aliases: fteam
