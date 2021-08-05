@@ -20,11 +20,16 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+    maven {
+        name = 'MythicMobs'
+        url = 'https://mvn.lumine.io/repository/maven-public/'
+    }
 }
 
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
     compileOnly fileTree(dir: 'lib', include: ['FancyCore-1.1.2.jar'])
+    compileOnly "io.lumine.xikage:MythicMobs:4.9.1"
 }
 
 processResources {

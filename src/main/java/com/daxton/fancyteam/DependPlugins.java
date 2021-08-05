@@ -1,6 +1,7 @@
 package com.daxton.fancyteam;
 
 
+import com.daxton.fancyteam.listener.MythicMobListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -19,7 +20,10 @@ public class DependPlugins {
             fancyTeam.getLogger().severe("*** FancyItems將被卸載。 ***");
             return false;
         }
-
+        if (Bukkit.getServer().getPluginManager().getPlugin("MythicMobs") != null) {
+            fancyTeam.getLogger().info(ChatColor.GREEN+"Loaded MythicMobs");
+            Bukkit.getPluginManager().registerEvents(new MythicMobListener(), fancyTeam);
+        }
         return true;
     }
 

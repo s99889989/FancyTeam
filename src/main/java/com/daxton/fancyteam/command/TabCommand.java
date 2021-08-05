@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class TabCommand implements TabCompleter {
 
-    private final String[] subCommands = {"reload"};
+    private final String[] subCommands = {"reload", "gui"};
 
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args){

@@ -23,8 +23,8 @@ public final class FancyTeam extends JavaPlugin {
 			return;
 		}
 		//指令
-		Objects.requireNonNull(Bukkit.getPluginCommand("fancypack")).setExecutor(new MainCommand());
-		Objects.requireNonNull(Bukkit.getPluginCommand("fancypack")).setTabCompleter(new TabCommand());
+		Objects.requireNonNull(Bukkit.getPluginCommand("fancyteam")).setExecutor(new MainCommand());
+		Objects.requireNonNull(Bukkit.getPluginCommand("fancyteam")).setTabCompleter(new TabCommand());
 		//開服執行任務
 		Start.execute();
 		//監聽

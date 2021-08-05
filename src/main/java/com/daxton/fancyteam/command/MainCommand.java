@@ -3,6 +3,7 @@ package com.daxton.fancyteam.command;
 
 import com.daxton.fancyteam.FancyTeam;
 import com.daxton.fancyteam.config.FileConfig;
+import com.daxton.fancyteam.gui.MainTeam;
 import com.daxton.fancyteam.task.Reload;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,11 +15,22 @@ public class MainCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args){
+
+        if(sender instanceof Player){
+            Player player = (Player) sender;
+            //打開組隊介面
+            if(args.length == 1 && args[0].equalsIgnoreCase("gui")) {
+                MainTeam.open(player);
+            }
+
+        }
+
         if(sender instanceof Player && !sender.isOp()){
             return true;
         }
+
         //重新讀取設定
-        if(args[0].equalsIgnoreCase("reload") && args.length == 1) {
+        if(args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             //重新讀取的一些程序
             Reload.execute();
             String reloadString = FileConfig.languageConfig.getString("Language.Reload");
@@ -28,6 +40,9 @@ public class MainCommand implements CommandExecutor {
             }
             FancyTeam.fancyTeam.getLogger().info(reloadString);
         }
+
+
+
 
         return true;
     }
