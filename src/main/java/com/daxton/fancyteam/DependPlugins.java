@@ -15,15 +15,22 @@ public class DependPlugins {
             fancyTeam.getLogger().info(ChatColor.GREEN+"Loaded FancyCore");
         }else {
             fancyTeam.getLogger().severe("*** FancyCore is not installed or not enabled. ***");
-            fancyTeam.getLogger().severe("*** FancyItemsy will be disabled. ***");
+            fancyTeam.getLogger().severe("*** FancyTeam will be disabled. ***");
             fancyTeam.getLogger().severe("*** FancyCore未安裝或未啟用。 ***");
-            fancyTeam.getLogger().severe("*** FancyItems將被卸載。 ***");
+            fancyTeam.getLogger().severe("*** FancyTeam將被卸載。 ***");
             return false;
         }
         if (Bukkit.getServer().getPluginManager().getPlugin("MythicMobs") != null) {
             fancyTeam.getLogger().info(ChatColor.GREEN+"Loaded MythicMobs");
             Bukkit.getPluginManager().registerEvents(new MythicMobListener(), fancyTeam);
+        }else {
+            fancyTeam.getLogger().severe("*** MythicMobs is not installed or not enabled. ***");
+            fancyTeam.getLogger().severe("*** FancyTeam will be disabled. ***");
+            fancyTeam.getLogger().severe("*** MythicMobs未安裝或未啟用。 ***");
+            fancyTeam.getLogger().severe("*** FancyTeam將被卸載。 ***");
+            return false;
         }
+
         return true;
     }
 

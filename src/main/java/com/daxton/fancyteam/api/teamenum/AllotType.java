@@ -1,4 +1,4 @@
-package com.daxton.fancyteam.api;
+package com.daxton.fancyteam.api.teamenum;
 
 public enum AllotType {
 

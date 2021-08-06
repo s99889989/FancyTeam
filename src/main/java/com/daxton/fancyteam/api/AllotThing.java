@@ -1,6 +1,10 @@
 package com.daxton.fancyteam.api;
 
-import com.daxton.fancyteam.manager.AllManager;
+import com.daxton.fancyteam.api.check.OnLineTeamCheck;
+import com.daxton.fancyteam.api.get.OnLineTeamGet;
+import com.daxton.fancyteam.api.mob.GetMob;
+import com.daxton.fancyteam.api.team.FTeam;
+import com.daxton.fancyteam.api.teamenum.AllotType;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import org.bukkit.Bukkit;
@@ -12,12 +16,12 @@ import java.util.stream.Collectors;
 
 public class AllotThing {
 
-	public static Set<Player> getPlayer(Player triggerPlayer, Entity mob){
+	//獲取各類型玩家
+	public static Set<Player> getPlayer(Player triggerPlayer, Entity mob, AllotType itemGetType){
 		Set<Player> playerSet = new HashSet<>();
 
-		if(checkHaveTeam(triggerPlayer)){
-			FTeam fTeam = getPlayerFTeam(triggerPlayer);
-			AllotType itemGetType = fTeam.getItem();
+		if(OnLineTeamCheck.isHaveTeam(triggerPlayer)){
+			FTeam fTeam = OnLineTeamGet.playerFTeam(triggerPlayer);
 			if(itemGetType == AllotType.Each){
 				//FancyTeam.fancyTeam.getLogger().info("個自");
 				playerSet.add(triggerPlayer);
@@ -34,15 +38,15 @@ public class AllotThing {
 			}
 			if(itemGetType == AllotType.Damage){
 				//FancyTeam.fancyTeam.getLogger().info("傷害");
-				if(getActiveMob(mob) != null){
-					ActiveMob activeMob = getActiveMob(mob);
+				if(GetMob.activeMob(mob) != null){
+					ActiveMob activeMob = GetMob.activeMob(mob);
 					Player mostPlayer = null;
 					double most = 0;
 					for(AbstractEntity abstractEntity : activeMob.getThreatTable().getAllThreatTargets()){
 						Entity entity = abstractEntity.getBukkitEntity();
 						if(entity instanceof Player){
 							Player p = (Player) entity;
-							if(checkIsSameTeam(triggerPlayer, p)){
+							if(OnLineTeamCheck.isSameTeam(triggerPlayer, p)){
 								//FancyTeam.fancyTeam.getLogger().info(entity.getName());
 								double d = activeMob.getThreatTable().getThreat(abstractEntity);
 								if(d > most){
@@ -61,38 +65,6 @@ public class AllotThing {
 		}
 
 		return playerSet;
-	}
-
-	public static boolean checkIsSameTeam(Player player1, Player player2){
-		if(checkHaveTeam(player1)){
-			FTeam fTeam = getPlayerFTeam(player1);
-			UUID uuid2 = player2.getUniqueId();
-			return fTeam.getOnLinePlayers().stream().anyMatch(uuid -> uuid.equals(uuid2));
-		}
-		return false;
-	}
-
-	public static ActiveMob getActiveMob(Entity mob){
-		UUID mobUUID = mob.getUniqueId();
-		if(AllManager.mobUUID_ActiveMob_Map.get(mobUUID) != null){
-			return AllManager.mobUUID_ActiveMob_Map.get(mobUUID);
-		}
-		return null;
-	}
-
-	public static FTeam getPlayerFTeam(Player player){
-		UUID playerUUID = player.getUniqueId();
-		if(AllManager.playerUUID_team_Map.get(playerUUID) != null){
-			String teamName = AllManager.playerUUID_team_Map.get(playerUUID);
-			return AllManager.teamName_FTeam_Map.get(teamName);
-		}
-		return null;
-	}
-
-
-	public static boolean checkHaveTeam(Player player){
-		UUID playerUUID = player.getUniqueId();
-		return AllManager.playerUUID_team_Map.get(playerUUID) != null;
 	}
 
 }

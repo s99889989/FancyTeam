@@ -1,9 +1,10 @@
 package com.daxton.fancyteam.listener;
 
 import com.daxton.fancycore.api.gui.GUI;
-import com.daxton.fancyteam.api.AllotThing;
-import com.daxton.fancyteam.api.FTeam;
-import com.daxton.fancyteam.gui.CreateTeam;
+import com.daxton.fancyteam.api.team.FTeam;
+import com.daxton.fancyteam.api.check.OnLineTeamCheck;
+import com.daxton.fancyteam.api.get.OnLineTeamGet;
+import com.daxton.fancyteam.gui.base.CreateTeam;
 import com.daxton.fancyteam.gui.MainTeam;
 import com.daxton.fancyteam.manager.AllManager;
 import com.daxton.fancyteam.task.TeamStates;
@@ -28,9 +29,12 @@ public class PlayerListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
+
         AllManager.playerUUID_chat_Map.put(uuid, false);
         TeamStates.onLine(player);
         PlayerListener.onOnLinePlaeyrChange();
+
+
     }
     @EventHandler//當玩家登出
     public void onPlayerQuit(PlayerQuitEvent event){
@@ -67,9 +71,9 @@ public class PlayerListener implements Listener {
         }
         Player attackerPlayer = (Player) attacker;
         Player attackedPlayer = (Player) attacked;
-        if(AllotThing.checkHaveTeam(attackerPlayer)){
-            if(AllotThing.checkIsSameTeam(attackerPlayer, attackedPlayer)){
-                FTeam fTeam = AllotThing.getPlayerFTeam(attackerPlayer);
+        if(OnLineTeamCheck.isHaveTeam(attackerPlayer)){
+            if(OnLineTeamCheck.isSameTeam(attackerPlayer, attackedPlayer)){
+                FTeam fTeam = OnLineTeamGet.playerFTeam(attackerPlayer);
                 event.setCancelled(!fTeam.isDamageTeamPlayer());
             }
         }
@@ -78,15 +82,15 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOW)//當玩家聊天
     public void onChat(AsyncPlayerChatEvent event){
         Player player = event.getPlayer();
-        if(AllotThing.checkHaveTeam(player)){
-            FTeam fTeam = AllotThing.getPlayerFTeam(player);
-            if(fTeam.getTeam_Chat(player)){
+        if(OnLineTeamCheck.isHaveTeam(player)){
+            FTeam fTeam = OnLineTeamGet.playerFTeam(player);
+            if(fTeam.isTeam_Chat(player)){
                 String chatMessage = event.getMessage();
                 event.setCancelled(true);
                 String playerName = player.getName();
-
+                String teamName = fTeam.getTeamName();
                 fTeam.getOnLinePlayers().stream().map(Bukkit::getPlayer).forEach(player1 -> {
-                    player1.sendMessage(playerName+"->"+chatMessage);
+                    player1.sendMessage("["+teamName+"] "+playerName+"->"+chatMessage);
                 });
 
             }
@@ -109,15 +113,6 @@ public class PlayerListener implements Listener {
     public static void onOnLinePlaeyrChange(){
         onTeamChange();
     }
-//    @EventHandler//玩家移動
-//    public void onPlayerMove(PlayerMoveEvent event){
-//        Player player = event.getPlayer();
-//        String uuidString = player.getUniqueId().toString();
-//        if(AllManager.player_chat_Map.get(uuidString)){
-//
-//        }
-//    }
-
 
 
 }

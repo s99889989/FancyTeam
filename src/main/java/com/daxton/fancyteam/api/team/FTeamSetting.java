@@ -1,5 +1,7 @@
-package com.daxton.fancyteam.api;
+package com.daxton.fancyteam.api.team;
 
+import com.daxton.fancyteam.api.teamenum.AllotType;
+import com.daxton.fancyteam.api.teamenum.TeamListType;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -31,7 +33,7 @@ public class FTeamSetting {
 		team_Chat.put(uuid, in);
 	}
 
-	public boolean getTeam_Chat(Player player) {
+	public boolean isTeam_Chat(Player player) {
 		UUID uuid = player.getUniqueId();
 		team_Chat.putIfAbsent(uuid, false);
 		return team_Chat.get(uuid);

@@ -1,7 +1,6 @@
-package com.daxton.fancyteam.api;
+package com.daxton.fancyteam.api.team;
 
 import com.daxton.fancycore.api.gui.GUI;
-import com.daxton.fancyteam.FancyTeam;
 import com.daxton.fancyteam.config.TeamConfig;
 import com.daxton.fancyteam.gui.MainTeam;
 import com.daxton.fancyteam.listener.PlayerListener;
@@ -24,6 +23,8 @@ public class FTeam extends FTeamSetting{
 	private Set<UUID> offlinePlayers = new HashSet<>();
 	//申請入對玩家
 	private Set<UUID> applyPlayers = new HashSet<>();
+	//邀請入隊的玩家
+	private Set<UUID> invitePlayers = new HashSet<>();
 	//建立隊伍
 	public FTeam(Player player, String teamName){
 		this.teamName = teamName;
@@ -50,11 +51,34 @@ public class FTeam extends FTeamSetting{
 		TeamConfig.setPlayerData(player, teamName);
 		PlayerListener.onTeamChange();
 	}
-	//玩家離開隊伍
-	public void playerLeave(Player player){
+	//玩家加入隊伍
+	public void playerJoin(UUID uuid){
+		onlinePlayers.add(uuid);
+		invitePlayers.remove(uuid);
+		AllManager.playerUUID_team_Map.put(uuid, teamName);
+		applyPlayers.remove(uuid);
+		//設置玩家設定
+		TeamConfig.setPlayerData(uuid, teamName);
+		PlayerListener.onTeamChange();
+	}
+	//邀請玩家入隊
+	public void addInvitePlayer(UUID uuid){
+		invitePlayers.add(uuid);
+	}
+	//確認已經邀請入隊
+	public boolean isInvitePlayer(UUID uuid){
+		return invitePlayers.contains(uuid);
+	}
+	//申請加入隊伍
+	public void addApllyPlayer(Player player){
 		UUID uuid = player.getUniqueId();
+		applyPlayers.add(uuid);
+	}
 
+	//玩家離開隊伍
+	public void playerLeave(UUID uuid){
 		onlinePlayers.remove(uuid);
+		offlinePlayers.remove(uuid);
 		AllManager.playerUUID_team_Map.remove(uuid);
 		if(uuid.equals(leader)){
 			leader = null;
@@ -68,14 +92,14 @@ public class FTeam extends FTeamSetting{
 			}
 		}
 		//移除玩家設定
-		TeamConfig.removePlayerData(player);
+		TeamConfig.removePlayerData(uuid);
+		TeamConfig.setTeamConfig(this);
 		PlayerListener.onTeamChange();
 	}
 	//解散隊伍
 	public void disbandTeam(){
 		TeamConfig.removeTeam(teamName);
 		onlinePlayers.forEach(uuid -> {
-			FancyTeam.fancyTeam.getLogger().info("移除"+uuid);
 			AllManager.playerUUID_team_Map.remove(uuid);
 			Player player = Bukkit.getPlayer(uuid);
 			if(AllManager.playerUUID_GUI_Map.get(uuid) != null){

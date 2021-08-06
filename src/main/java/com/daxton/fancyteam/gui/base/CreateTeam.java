@@ -1,17 +1,18 @@
-package com.daxton.fancyteam.gui;
+package com.daxton.fancyteam.gui.base;
 
 import com.daxton.fancycore.api.gui.GUI;
 import com.daxton.fancycore.api.gui.GuiAction;
-import com.daxton.fancyteam.api.FTeam;
+import com.daxton.fancyteam.api.team.FTeam;
 import com.daxton.fancyteam.config.FileConfig;
 import com.daxton.fancyteam.config.TeamConfig;
+import com.daxton.fancyteam.gui.MainTeam;
 import com.daxton.fancyteam.listener.PlayerListener;
 import com.daxton.fancyteam.manager.AllManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
-
+import static com.daxton.fancyteam.config.FileConfig.languageConfig;
 import java.util.UUID;
 
 public class CreateTeam implements GuiAction {
@@ -30,7 +31,7 @@ public class CreateTeam implements GuiAction {
 		if(clickType == ClickType.LEFT){
 			AllManager.playerUUID_chat_Map.put(uuid, true);
 			gui.close();
-			player.sendTitle(" ","請輸入隊伍名稱",10,40,40);
+			player.sendTitle(" ",languageConfig.getString("Language.Message.CreateTeam"),10,40,40);
 		}
 	}
 
@@ -38,9 +39,9 @@ public class CreateTeam implements GuiAction {
 		AllManager.playerUUID_chat_Map.put(uuid, false);
 		FileConfiguration teamConfig = FileConfig.config_Map.get("team.yml");
 		if(teamConfig.contains(teamName)){
-			player.sendTitle(" ","建立失敗，此隊伍名稱已使用",10,40,40);
+			player.sendTitle(" ",languageConfig.getString("Language.Message.CreateSameName"),10,40,40);
 		}else {
-			player.sendMessage("成功建立隊伍: "+teamName);
+			player.sendMessage(languageConfig.getString("Language.Message.CreateSuccess").replace("%team_name%", teamName));
 			FTeam team = new FTeam(player, teamName);
 			AllManager.teamName_FTeam_Map.put(teamName, team);
 			//設置隊伍設定

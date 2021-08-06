@@ -1,31 +1,29 @@
-package com.daxton.fancyteam.gui;
+package com.daxton.fancyteam.gui.base;
 
 import com.daxton.fancycore.api.gui.GUI;
 import com.daxton.fancycore.api.gui.GuiAction;
-import com.daxton.fancyteam.api.FTeam;
+import com.daxton.fancyteam.manager.AllManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 
-public class ChangeExperience implements GuiAction {
+import java.util.UUID;
+
+public class Close implements GuiAction {
 
 	private final GUI gui;
 	private final Player player;
-	private final String uuidString;
-	private final FTeam fTeam;
+	private final UUID uuid;
 
-	public ChangeExperience(GUI gui, Player player, FTeam fTeam){
-		this.fTeam = fTeam;
+	public Close(GUI gui, Player player){
 		this.gui = gui;
 		this.player = player;
-		this.uuidString = player.getUniqueId().toString();
+		this.uuid = player.getUniqueId();
 	}
-
-	//改變經驗設定
+	//建立隊伍
 	public void execute(ClickType clickType, InventoryAction action, int slot){
 		if(clickType == ClickType.LEFT){
-			fTeam.setExperienceNext();
-			MainTeam.open(player);
+			gui.close();
 		}
 	}
 

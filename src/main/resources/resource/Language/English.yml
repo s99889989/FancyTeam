@@ -1,236 +1,270 @@
 Language:
   Reload: '§e[FancyTeam] §aRe-read the configuration file.'
+  Title: '§fTeam gui'
+  Message:
+    CreateTeam: '§fPlease enter the team name'
+    CreateSameName: '§fFailed to create, this team name is already used'
+    CreateSuccess: '§fSuccessfully build a team%team_name%'
+    AlreadyInvited: '§fThe player has been invited to the team'
+    AlreadyApply: '§fYou have already applied for this team'
+    OnLine: '%player_name% [Online]'
+    OffLine : '%player_name% [Offline]'
   Gui:
     Main:
       CreateTeam:
         Material: PLAYER_HEAD
         CustomModelData: 0
         HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Y4YTM2MzY2M2RkOTI2ZmZhYmJlNGIwYjIxYzcwNzFmYzk5OGJhNGNhNDg1MTg1YWZmYzkwYTc3NDlmZmU3MSJ9fX0='
-        DisplayName: '§e建立隊伍'
+        DisplayName: '§eBuild a team'
         Lore:
         - '§f'
-        - '§f建立隊伍'
+        - '§fBuild a team'
       JoinTeam:
         Material: PLAYER_HEAD
         CustomModelData: 0
         HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWE5NTJkMjcyYjc0ODVmYzNiNDE5ZTU2ZDczMDc0ZmMxOGNmMzExZTU0MTNhODNhMTFlMWU5Njc3YmQ1MDBmIn19fQ=='
-        DisplayName: '§e加入隊伍'
+        DisplayName: '§eJoin the team'
         Lore:
           - '§f'
-          - '§f加入隊伍'
+          - '§fJoin the team'
       DisbandTeam:
         Material: PLAYER_HEAD
         CustomModelData: 0
         HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODI1M2YxMjA4OTI5ZTI1ZGJkMTk5NmY2YjY1Y2IzMGU3OTg4YWE3ZTFjMjZlOGE0OTFlNTJkOWRhZTc4OTM4OSJ9fX0='
-        DisplayName: '§e解散隊伍'
+        DisplayName: '§eDisband the team'
         Lore:
           - '§f'
-          - '§f解散隊伍'
+          - '§fDisband the team'
       LeaveTeam:
         Material: PLAYER_HEAD
         CustomModelData: 0
         HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODM1ODg1NmExODQzMmY1MzkwNDBlNDBhYTQ1MjZjYjkzNzBlYjljZGYxMTZmN2I3MjQ1NDkxNDM2N2VjM2NiMSJ9fX0='
-        DisplayName: '§e離開隊伍'
+        DisplayName: '§eLeave the team'
         Lore:
         - '§f'
-        - '§f離開隊伍'
-      Define:
+        - '§fLeave the team'
+      KickPlayer:
         Material: PLAYER_HEAD
         CustomModelData: 0
-        HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2FmNTliOGFhMGY4MzU0NmVmMGQxNzhjY2Y4N2U3ZWQ4OGNmNzg1OGNhYWU3OWIzNjMzY2JkNzViNjUwNTI1ZiJ9fX0='
-        DisplayName: '§e確定'
+        HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2YzNWM1N2NkZTY0Njk1M2FjMTU1NjAxOGU2YzhmOTBkYzY5ZDI3OTMwMjhmN2IzYmQ3MjY2ZDIyZmRjNGI0MiJ9fX0='
+        DisplayName: '§e'
         Lore:
-        - '§f'
-        - '§f確定'
+          - '§f'
+          - '§fClick to kick the player'
       Close:
         Material: PLAYER_HEAD
         CustomModelData: 0
         HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzMyYWNiODYxMmQzZTI1OGE4NzUxZGE5M2M5YzY0NzUwMjg2YzdiZWRiYjZkZTQ0MWVkNmVkM2Q2NDg3ZWEifX19'
-        DisplayName: '§e關閉'
+        DisplayName: '§eClose'
         Lore:
           - '§f'
-          - '§f關閉'
+          - '§fClose'
+      Define:
+        Material: PLAYER_HEAD
+        CustomModelData: 0
+        HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2FmNTliOGFhMGY4MzU0NmVmMGQxNzhjY2Y4N2U3ZWQ4OGNmNzg1OGNhYWU3OWIzNjMzY2JkNzViNjUwNTI1ZiJ9fX0='
+        DisplayName: '§eDefine'
+        Lore:
+        - '§f'
+        - '§fDefine'
       Cancel:
         Material: PLAYER_HEAD
         CustomModelData: 0
         HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2ZlMmM0NDA3ZDcxNTA4MDg5Mjg5Mzc5ZGYyZjI3Nzk2YmUyNzQ4YjBmNjhiYjc0ZTkxYTdjMTM2MTI5ODQ4NCJ9fX0='
-        DisplayName: '§e取消'
+        DisplayName: '§eCancel'
         Lore:
         - '§f'
-        - '§f取消'
+        - '§fCancel'
       TeamList:
         InvitePlayer:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTdmODJhY2ViOThmZTA2OWU4YzE2NmNlZDAwMjQyYTc2NjYwYmJlMDcwOTFjOTJjZGRlNTRjNmVkMTBkY2ZmOSJ9fX0='
-          DisplayName: '§e邀請玩家'
+          DisplayName: '§eList type'
           Lore:
             - '§f'
-            - '§f邀請玩家'
+            - '§fCan invite players'
         ApplyInvitePlayer:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmQzMTAzMWM5YTBiOTUwZjhjNjEzMjRhNzNmYjg4YzBhMjFhYmYyMzg3YTJlZDY4YWZjZTY5NzRhOTlmM2I3OSJ9fX0='
-          DisplayName: '§e申請加入玩家'
+          DisplayName: '§eList type'
           Lore:
             - '§f'
-            - '§f申請加入玩家'
+            - '§fApply to join a player'
         TeamPlayers:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDc5YjdiMjU1ZmM0YzRhMDE1YTIwYWJhZDg3Y2YyYzc0MWViZDYyYzA2MGU4M2E4MWM5OGFkZWYyZWU2NDg5NCJ9fX0='
-          DisplayName: '§e隊友列表'
+          DisplayName: '§eList type'
           Lore:
             - '§f'
-            - '§f隊友列表'
+            - '§fTeammate list'
+      NoTeamList:
+        JoinTeamList:
+          Material: PLAYER_HEAD
+          CustomModelData: 0
+          HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTdmODJhY2ViOThmZTA2OWU4YzE2NmNlZDAwMjQyYTc2NjYwYmJlMDcwOTFjOTJjZGRlNTRjNmVkMTBkY2ZmOSJ9fX0='
+          DisplayName: '§eList type'
+          Lore:
+            - '§f'
+            - '§fAvailable teams'
+        InviteTimeList:
+          Material: PLAYER_HEAD
+          CustomModelData: 0
+          HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmQzMTAzMWM5YTBiOTUwZjhjNjEzMjRhNzNmYjg4YzBhMjFhYmYyMzg3YTJlZDY4YWZjZTY5NzRhOTlmM2I3OSJ9fX0='
+          DisplayName: '§eList type'
+          Lore:
+            - '§f'
+            - '§fList of teams that invited you to join'
     SettingTeam:
       Experience:
         Each:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzIzNTI5YmRmYTAyOGI3NjM5ZDI2NjcyZWY4YWRhYWYwYjM1YmE4YTc5NWNiYTM0N2ViMmRjNTMxZjJlMzk1YSJ9fX0='
-          DisplayName: '§e經驗獲取設置'
+          DisplayName: '§eExperience distribution'
           Lore:
           - '§f'
-          - '§f各自取得'
+          - '§fGet separately'
         Average:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjI3ODZhMGI3MWJiNGE3MDEwOGE3NDQzNWU1Y2VlNTg4ZmRmMzU5YjllYWVmYjc0YjY4Mzc3N2I1MTgwNjI5OCJ9fX0='
-          DisplayName: '§e經驗獲取設置'
+          DisplayName: '§eExperience distribution'
           Lore:
             - '§f'
-            - '§f平均分配'
+            - '§fEqually distributed'
         Random:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWFlMDhiYzUxM2RiZTE1ZmU3NmM3ZjQwMzI4NzhhNTBjOTdmNzRhOGM4MTVkY2IxYmQ1NzNmNTQwZjJhMDgwZiJ9fX0='
-          DisplayName: '§e經驗獲取設置'
+          DisplayName: '§eExperience distribution'
           Lore:
             - '§f'
-            - '§f隨機分配'
+            - '§fRandomly assigned'
         Damage:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmNjNjk4NzY4ODlmMjJmZjUwOTg1N2Q5YTUyNDI0YWU4YTQ5MzlkYWFlNmI2ZDgyNTczZTkxYTcwMDc0MGE2ZiJ9fX0='
-          DisplayName: '§e經驗獲取設置'
+          DisplayName: '§eExperience distribution'
           Lore:
             - '§f'
-            - '§f依據傷害'
+            - '§fBased on injury'
       Item:
         Each:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjk4OGNmMzhiNzE5MmNhZTVhNDU3NDkzMTEzNjQyZjExOGVkMDZmM2FjZmMyNTc5YTI5MDlkNGFiZmY2ZGM3ZCJ9fX0='
-          DisplayName: '§e物品獲取設置'
+          DisplayName: '§eItem allocation'
           Lore:
             - '§f'
-            - '§f各自取得'
+            - '§fGet separately'
         Average:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDExYzNlM2ZlMGMwNzZjNDNlMzQ2MDg3YTMxZjVhZTMyMTFmMzA4OWYzMTU5ZDM5ZGJjMWQ1N2Q2OTdlMTJmNyJ9fX0='
-          DisplayName: '§e物品獲取設置'
+          DisplayName: '§eItem allocation'
           Lore:
             - '§f'
-            - '§f平均分配'
+            - '§fEqually distributed'
         Random:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTIwOGY1ODk3ZjEyZTVmY2IyZThiNDM4MWY1NDQ1YTc3MTFlODQ3MjFlYzRhN2ZjMTAxZDViNzQwYjg2ZjhmYSJ9fX0='
-          DisplayName: '§e物品獲取設置'
+          DisplayName: '§eItem allocation'
           Lore:
             - '§f'
-            - '§f隨機分配'
+            - '§fRandomly assigned'
         Damage:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWY1YjRiMTdlMzk3ZmNlODdkMTUzZDljY2RlMTIxNTllY2NjM2EyMTBiYTg5YTQ0ZGE4ZDAyN2YxYmM0ZmZhZSJ9fX0='
-          DisplayName: '§e物品獲取設置'
+          DisplayName: '§eItem allocation'
           Lore:
             - '§f'
-            - '§f依據傷害'
+            - '§fBased on injury'
       Money:
         Each:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTAwZWY2NDdhODVlMGE4MTBjYzkzZTMzZTZmNmRiOTdkNjE1YzlkZmYyNjVhZTk4MzE3OTliMWY3ZWZkOGNlMyJ9fX0='
-          DisplayName: '§e金錢獲取設置'
+          DisplayName: '§eMoney distribution'
           Lore:
             - '§f'
-            - '§f各自取得'
+            - '§fGet separately'
         Average:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWE1OGU0NDFiNWRhZGZhMDM3MTc2NTk3MzJlYTQ3NGQxMjQzMDE2ODg0MmMyYzFlM2EzNTMxMjJlZWVkMDMxNiJ9fX0='
-          DisplayName: '§e金錢獲取設置'
+          DisplayName: '§eMoney distribution'
           Lore:
             - '§f'
-            - '§f平均分配'
+            - '§fEqually distributed'
         Random:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTRmZjg4ZjIxZTAxNDljNGRlODlhYTMxYzdkYzBjZDM0MjljYjZjOWFiMjM3YmJmOTRiZjYwOTEwZjc4OWI5OSJ9fX0='
-          DisplayName: '§e金錢獲取設置'
+          DisplayName: '§eMoney distribution'
           Lore:
             - '§f'
-            - '§f隨機分配'
+            - '§fRandomly assigned'
         Damage:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThhY2JkMTMxNzgyZWY2ZDIyZmU0MTg3YWQ0NjlhMjNmYjc0OGMyNzAyMWQ5NjVhMDEyMWFkNjQ4MWRmNGQzOCJ9fX0='
-          DisplayName: '§e金錢獲取設置'
+          DisplayName: '§eMoney distribution'
           Lore:
           - '§f'
-          - '§f依據傷害'
+          - '§fBased on injury'
       AttackTeammate:
         true:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjk4MTgxMGJlMDM3ZWQ2MGYxOTI2NzJlN2M0YzE0ZmJlNDFhMGIwMzI1NGE5NDJkNDUyYjc4YjVlNTVhNTI0OCJ9fX0='
-          DisplayName: '§e是否能攻擊隊友'
+          DisplayName: '§eCan attack teammates'
           Lore:
           - '§f'
-          - '§f是'
+          - '§fYes'
         false:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTIwMTU5YmI3OTJmM2Q3YWE4YWE5MWYxYjBlMWI5ZTRlNzk4N2ZiY2ViOWFlYmZhNjFiMjE0MzMxOTk3ZTRmIn19fQ=='
-          DisplayName: '§e是否能攻擊隊友'
+          DisplayName: '§eCan attack teammates'
           Lore:
           - '§f'
-          - '§f否'
+          - '§fNo'
       AgreeJoin:
         true:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk4ZDRmZTUxNzZhM2FjY2RlYmIxYzNmYjBiMjZjZjNhMTgxZmZmYzE2MGVhNTJhMDI4Y2I0MWYzNGNmZTEifX19'
-          DisplayName: '§e是否讓玩家自動加入'
+          DisplayName: '§eWhether to let players join automatically'
           Lore:
           - '§f'
-          - '§f是'
+          - '§fYes'
         false:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Q0OWI0NGVjMDk0N2MyMjMxZThmODc5ZWJhYTg5ZDU1MjkzYTg3MjE5YTYxYjZhNWNmZGRkODgzYmI3NyJ9fX0='
-          DisplayName: '§e是否讓玩家自動加入'
+          DisplayName: '§eWhether to let players join automatically'
           Lore:
           - '§f'
-          - '§f否'
+          - '§fNo'
       TeamChat:
         true:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk4ZDRmZTUxNzZhM2FjY2RlYmIxYzNmYjBiMjZjZjNhMTgxZmZmYzE2MGVhNTJhMDI4Y2I0MWYzNGNmZTEifX19'
-          DisplayName: '§e是否開啟隊伍聊天'
+          DisplayName: '§eWhether to open team chat'
           Lore:
             - '§f'
-            - '§f是'
+            - '§fYes'
         false:
           Material: PLAYER_HEAD
           CustomModelData: 0
           HeadValue: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Q0OWI0NGVjMDk0N2MyMjMxZThmODc5ZWJhYTg5ZDU1MjkzYTg3MjE5YTYxYjZhNWNmZGRkODgzYmI3NyJ9fX0='
-          DisplayName: '§e是否開啟隊伍聊天'
+          DisplayName: '§eWhether to open team chat'
           Lore:
             - '§f'
-            - '§f否'
+            - '§fNo'

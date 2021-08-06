@@ -1,56 +1,67 @@
 package com.daxton.fancyteam.task;
 
-import com.daxton.fancyteam.api.FTeam;
+import com.daxton.fancyteam.api.check.OffLineTeamCheck;
+import com.daxton.fancyteam.api.check.OnLineTeamCheck;
+import com.daxton.fancyteam.api.get.OffLineTeamGet;
+import com.daxton.fancyteam.api.get.OnLineTeamGet;
+import com.daxton.fancyteam.api.team.FTeam;
+import com.daxton.fancyteam.api.team.NTeam;
 import com.daxton.fancyteam.config.FileConfig;
 import com.daxton.fancyteam.manager.AllManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import java.util.List;
 import java.util.UUID;
 
 
 public class TeamStates {
-	//將隊伍設為上線
-	public static void onLine(Player player){
+
+	//玩家上線有隊伍
+	public static void onLineHaveTeam(Player player){
 		UUID uuid = player.getUniqueId();
 		String uuidString = uuid.toString();
-		FileConfiguration dataConfig = FileConfig.config_Map.get("playerdata.yml");
-		if(dataConfig.contains(uuidString)){
-			String teamName = dataConfig.getString(uuidString);
-			AllManager.playerUUID_team_Map.put(uuid, teamName);
-			if(AllManager.teamName_FTeam_Map.get(teamName) == null){
-				FileConfiguration teamConfig = FileConfig.config_Map.get("team.yml");
 
-				String leader = teamConfig.getString(teamName+".leader");
-				List<String> offLinePlayer = teamConfig.getStringList(teamName+".players");
-				String experience = teamConfig.getString(teamName+".experience");
-				String item = teamConfig.getString(teamName+".item");
-				String money = teamConfig.getString(teamName+".money");
-				boolean autoJoin = teamConfig.getBoolean(teamName+".autoJoin");
-				boolean damageTeamPlayer = teamConfig.getBoolean(teamName+".damageTeamPlayer");
+		String teamName = OffLineTeamGet.teamName(player);
 
-				FTeam team = new FTeam(UUID.fromString(uuidString), teamName);
-				team.setLeader(UUID.fromString(leader));
-				team.setOfflinePlayers(offLinePlayer);
-				team.playerOnLine(player);
-				team.setExperience(experience);
-				team.setItem(item);
-				team.setMoney(money);
-				team.setAutoJoin(autoJoin);
-				team.setDamageTeamPlayer(damageTeamPlayer);
+		AllManager.playerUUID_team_Map.put(uuid, teamName);
+		if(!OffLineTeamCheck.isTeamOnLine(teamName)){
 
-				AllManager.teamName_FTeam_Map.put(teamName, team);
+			FTeam team = new FTeam(UUID.fromString(uuidString), teamName);
+			team.setLeader(UUID.fromString(OffLineTeamGet.leader(player)));
+			team.setOfflinePlayers(OffLineTeamGet.players(player));
+			team.playerOnLine(player);
+			team.setExperience(OffLineTeamGet.experience(player));
+			team.setItem(OffLineTeamGet.item(player));
+			team.setMoney(OffLineTeamGet.money(player));
+			team.setAutoJoin(OffLineTeamGet.autoJoin(player));
+			team.setDamageTeamPlayer(OffLineTeamGet.damageTeamPlayer(player));
 
-			}else {
-				FTeam team = AllManager.teamName_FTeam_Map.get(teamName);
-				team.playerOnLine(player);
-			}
+			AllManager.teamName_FTeam_Map.put(teamName, team);
+
+		}else {
+			FTeam team = AllManager.teamName_FTeam_Map.get(teamName);
+			team.playerOnLine(player);
+		}
+
+	}
+	//玩家上線沒隊伍
+	public static void onLineNoHaveTeam(Player player){
+		UUID uuid = player.getUniqueId();
+		AllManager.playerUUID_NTeam_Map.putIfAbsent(uuid, new NTeam(player));
+	}
+
+	//玩家上線
+	public static void onLine(Player player){
+
+		if(OffLineTeamCheck.isHaveTeam(player)){
+			onLineHaveTeam(player);
+		}else {
+			//onLineNoHaveTeam(player);
 		}
 
 	}
 
-	//檢查是否將隊伍設為離線
+	//玩家下線
 	public static void offLine(Player player){
 		UUID uuid = player.getUniqueId();
 		String uuidString = uuid.toString();
@@ -61,11 +72,19 @@ public class TeamStates {
 			if(AllManager.teamName_FTeam_Map.get(teamName) != null){
 				FTeam team = AllManager.teamName_FTeam_Map.get(teamName);
 				team.playerOffLine(player);
-				if(team.getOnLinePlayers().size() == 0){
-					AllManager.teamName_FTeam_Map.remove(teamName);
+				//如果隊伍沒人在線上，把隊伍從線上移除
+				if(OnLineTeamCheck.isNoPlayers(teamName)){
+					teamEmpty(player);
 				}
 			}
 		}
 	}
+
+	//如果隊伍沒人在線上，把隊伍從線上移除
+	public static void teamEmpty(Player player){
+		String teamName = OffLineTeamGet.teamName(player);
+		AllManager.teamName_FTeam_Map.remove(teamName);
+	}
+
 
 }

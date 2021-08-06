@@ -1,7 +1,7 @@
 package com.daxton.fancyteam.config;
 
 import com.daxton.fancyteam.FancyTeam;
-import com.daxton.fancyteam.api.FTeam;
+import com.daxton.fancyteam.api.team.FTeam;
 import com.daxton.fancyteam.manager.AllManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -27,9 +27,34 @@ public class TeamConfig {
 		}
 	}
 
+	//把玩家入設定檔
+	public static void setPlayerData(UUID uuid, String teamName){
+
+		FileConfiguration dataConfig = FileConfig.config_Map.get("playerdata.yml");
+		dataConfig.set(uuid.toString(), teamName);
+
+		File file = new File(FancyTeam.fancyTeam.getDataFolder(), "playerdata.yml");
+		try {
+			dataConfig.save(file);
+		}catch (IOException exception){
+			exception.printStackTrace();
+		}
+	}
+
 	//把玩家移除設定檔
 	public static void removePlayerData(Player player){
 		UUID uuid = player.getUniqueId();
+		FileConfiguration dataConfig = FileConfig.config_Map.get("playerdata.yml");
+		dataConfig.set(uuid.toString(), null);
+		File file = new File(FancyTeam.fancyTeam.getDataFolder(), "playerdata.yml");
+		try {
+			dataConfig.save(file);
+		}catch (IOException exception){
+			exception.printStackTrace();
+		}
+	}
+	//把玩家移除設定檔
+	public static void removePlayerData(UUID uuid){
 		FileConfiguration dataConfig = FileConfig.config_Map.get("playerdata.yml");
 		dataConfig.set(uuid.toString(), null);
 		File file = new File(FancyTeam.fancyTeam.getDataFolder(), "playerdata.yml");
@@ -70,6 +95,7 @@ public class TeamConfig {
 	//設置隊伍設定檔
 	public static void setTeamConfig(FTeam team){
 		FileConfiguration teamConfig = FileConfig.config_Map.get("team.yml");
+
 		String teamName = team.getTeamName();
 		String leader = team.getLeader().toString();
 		List<String> onLinePlayer = team.getOnLinePlayers().stream().map(UUID::toString).collect(Collectors.toList());
