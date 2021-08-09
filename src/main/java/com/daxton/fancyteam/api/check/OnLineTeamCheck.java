@@ -19,6 +19,9 @@ public class OnLineTeamCheck {
 
 	//檢查palyer1是否有隊伍，並檢查player2是否跟player1同隊
 	public static boolean isSameTeam(Player player1, Player player2){
+		if(player1 == null || player2 == null){
+			return false;
+		}
 		if(isHaveTeam(player1)){
 			FTeam fTeam = OnLineTeamGet.playerFTeam(player1);
 			UUID uuid2 = player2.getUniqueId();

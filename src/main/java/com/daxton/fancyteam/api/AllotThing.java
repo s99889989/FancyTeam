@@ -1,12 +1,11 @@
 package com.daxton.fancyteam.api;
 
+import com.daxton.fancymobs.api.FancyMob;
+import com.daxton.fancymobs.manager.MobManager;
 import com.daxton.fancyteam.api.check.OnLineTeamCheck;
 import com.daxton.fancyteam.api.get.OnLineTeamGet;
-import com.daxton.fancyteam.api.mob.GetMob;
 import com.daxton.fancyteam.api.team.FTeam;
 import com.daxton.fancyteam.api.teamenum.AllotType;
-import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 public class AllotThing {
 
 	//獲取各類型玩家
-	public static Set<Player> getPlayer(Player triggerPlayer, Entity mob, AllotType itemGetType){
+	public static Set<Player> getPlayer(Player triggerPlayer, UUID mobUUID, AllotType itemGetType){
 		Set<Player> playerSet = new HashSet<>();
 
 		if(OnLineTeamCheck.isHaveTeam(triggerPlayer)){
@@ -38,28 +37,24 @@ public class AllotThing {
 			}
 			if(itemGetType == AllotType.Damage){
 				//FancyTeam.fancyTeam.getLogger().info("傷害");
-				if(GetMob.activeMob(mob) != null){
-					ActiveMob activeMob = GetMob.activeMob(mob);
-					Player mostPlayer = null;
-					double most = 0;
-					for(AbstractEntity abstractEntity : activeMob.getThreatTable().getAllThreatTargets()){
-						Entity entity = abstractEntity.getBukkitEntity();
-						if(entity instanceof Player){
-							Player p = (Player) entity;
-							if(OnLineTeamCheck.isSameTeam(triggerPlayer, p)){
-								//FancyTeam.fancyTeam.getLogger().info(entity.getName());
-								double d = activeMob.getThreatTable().getThreat(abstractEntity);
-								if(d > most){
-									most = d;
-									mostPlayer = p;
-								}
+				FancyMob fancyMob = MobManager.fancy_Mob_Map.get(mobUUID);
+				if(fancyMob != null){
+					Player mostPlayer = triggerPlayer;
+					double highest = 0;
+					for(UUID uuid : fancyMob.getThreatTable().keySet()){
+						if(OnLineTeamCheck.isSameTeam(triggerPlayer, Bukkit.getPlayer(uuid))){
+							double amount = fancyMob.getThreatTable().get(uuid);
+							if(amount > highest){
+								highest = amount;
+								mostPlayer = Bukkit.getPlayer(uuid);
 							}
 						}
 					}
-					if(mostPlayer != null){
-						playerSet.add(mostPlayer);
-					}
+					playerSet.add(mostPlayer);
+				}else {
+					playerSet.add(triggerPlayer);
 				}
+
 			}
 
 		}

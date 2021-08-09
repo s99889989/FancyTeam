@@ -2,7 +2,6 @@ package com.daxton.fancyteam.command;
 
 
 import com.daxton.fancyteam.FancyTeam;
-import com.daxton.fancyteam.config.FileConfig;
 import com.daxton.fancyteam.gui.MainTeam;
 import com.daxton.fancyteam.task.Reload;
 import org.bukkit.command.Command;
@@ -10,6 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import static com.daxton.fancyteam.config.FileConfig.languageConfig;
 
 public class MainCommand implements CommandExecutor {
 
@@ -33,12 +34,11 @@ public class MainCommand implements CommandExecutor {
         if(args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             //重新讀取的一些程序
             Reload.execute();
-            String reloadString = FileConfig.languageConfig.getString("Language.Reload");
-            if(sender instanceof Player && reloadString != null){
+            if(sender instanceof Player){
                 Player player = (Player) sender;
-                player.sendMessage(reloadString);
+                player.sendMessage(languageConfig.getString("OpMessage.Reload")+"");
             }
-            FancyTeam.fancyTeam.getLogger().info(reloadString);
+            FancyTeam.fancyTeam.getLogger().info(languageConfig.getString("LogMessage.Reload")+"");
         }
 
 

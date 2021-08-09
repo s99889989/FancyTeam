@@ -35,7 +35,7 @@ public class InvitePlayers implements GuiAction {
 				MainTeam.open(player);
 				MainTeam.open(invitePlayer);
 			}else {
-				player.sendMessage(languageConfig.getString("Language.Message.AlreadyInvited")+"");
+				player.sendMessage(languageConfig.getString("Message.AlreadyInvited")+"");
 			}
 		}
 	}

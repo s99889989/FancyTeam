@@ -34,7 +34,7 @@ public class JoinTeam implements GuiAction {
 				TeamConfig.setTeamConfig(fTeam);
 			}else {
 				if(fTeam.getApplyPlayers().contains(uuid)){
-					player.sendMessage(languageConfig.getString("Language.Message.AlreadyApply")+"");
+					player.sendMessage(languageConfig.getString("Message.AlreadyApply")+"");
 				}else {
 					fTeam.addApllyPlayer(player);
 				}

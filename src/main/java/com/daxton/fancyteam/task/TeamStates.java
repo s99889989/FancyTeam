@@ -7,6 +7,7 @@ import com.daxton.fancyteam.api.get.OnLineTeamGet;
 import com.daxton.fancyteam.api.team.FTeam;
 import com.daxton.fancyteam.api.team.NTeam;
 import com.daxton.fancyteam.config.FileConfig;
+import com.daxton.fancyteam.config.TeamConfig;
 import com.daxton.fancyteam.manager.AllManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -71,6 +72,10 @@ public class TeamStates {
 			String teamName = dataConfig.getString(uuidString);
 			if(AllManager.teamName_FTeam_Map.get(teamName) != null){
 				FTeam team = AllManager.teamName_FTeam_Map.get(teamName);
+				if(team.isLeader(player)){
+					TeamConfig.setTeamConfig(team);
+				}
+
 				team.playerOffLine(player);
 				//如果隊伍沒人在線上，把隊伍從線上移除
 				if(OnLineTeamCheck.isNoPlayers(teamName)){

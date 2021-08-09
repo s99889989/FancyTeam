@@ -2,12 +2,15 @@ package com.daxton.fancyteam;
 
 import com.daxton.fancyteam.command.MainCommand;
 import com.daxton.fancyteam.command.TabCommand;
+import com.daxton.fancyteam.config.FileConfig;
 import com.daxton.fancyteam.listener.PlayerListener;
 import com.daxton.fancyteam.task.Start;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
+
+import static com.daxton.fancyteam.config.FileConfig.languageConfig;
 
 public final class FancyTeam extends JavaPlugin {
 
@@ -16,10 +19,11 @@ public final class FancyTeam extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		fancyTeam = this;
+		//設定檔
+		FileConfig.execute();
 		//前置插件
 		if(!DependPlugins.depend()){
 			fancyTeam.setEnabled(false);
-			fancyTeam.onDisable();
 			return;
 		}
 		//指令
@@ -34,6 +38,6 @@ public final class FancyTeam extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-
+		fancyTeam.getLogger().info(languageConfig.getString("LogMessage.Disable"));
 	}
 }

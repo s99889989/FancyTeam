@@ -22,7 +22,7 @@ public class MainTeam {
 	public static void open(Player player){
 		UUID uuid = player.getUniqueId();
 		if(AllManager.playerUUID_GUI_Map.get(uuid) == null){
-			GUI gui = GUI.createGui(player, 54, languageConfig.getString("Language.Title"));
+			GUI gui = GUI.createGui(player, 54, languageConfig.getString("Title"));
 			AllManager.playerUUID_GUI_Map.put(uuid, gui);
 		}
 
@@ -41,16 +41,16 @@ public class MainTeam {
 	public static void noTeam(GUI gui, Player player){
 		UUID uuid = player.getUniqueId();
 		//建立隊伍
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Language.Gui.Main.CreateTeam"), false,1, 1);
+		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.Main.CreateTeam"), false,1, 1);
 		gui.setAction(new CreateTeam(gui, player), 1, 1);
 		//列表
 		AllManager.playerUUID_List_Map.putIfAbsent(uuid, "JoinTeamList");
 		String noTeamList = AllManager.playerUUID_List_Map.get(uuid);
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Language.Gui.Main.NoTeamList."+noTeamList), false,1, 2);
+		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.Main.NoTeamList."+noTeamList), false,1, 2);
 		gui.setAction(new NoTeamListChange(player), 1, 2);
 
 		if(noTeamList.equals("JoinTeamList")){
-			ItemStack teamItem = GuiButtom.valueOf(languageConfig,"Language.Gui.Main.JoinTeam");
+			ItemStack teamItem = GuiButtom.valueOf(languageConfig,"Gui.Main.JoinTeam");
 			List<Integer> ignore = new ArrayList<>();
 			AllManager.teamName_FTeam_Map.forEach((teamName, fTeam) -> {
 

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.daxton'
-version = '1.0'
+version = '1.1'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -20,16 +20,13 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
-    maven {
-        name = 'MythicMobs'
-        url = 'https://mvn.lumine.io/repository/maven-public/'
-    }
 }
 
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
     compileOnly fileTree(dir: 'lib', include: ['FancyCore-1.1.2.jar'])
-    compileOnly "io.lumine.xikage:MythicMobs:4.9.1"
+    compileOnly fileTree(dir: 'lib', include: ['FancyMobs-1.1.jar'])
+
 }
 
 processResources {

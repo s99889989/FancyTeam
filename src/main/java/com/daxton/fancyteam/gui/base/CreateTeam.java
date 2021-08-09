@@ -31,7 +31,7 @@ public class CreateTeam implements GuiAction {
 		if(clickType == ClickType.LEFT){
 			AllManager.playerUUID_chat_Map.put(uuid, true);
 			gui.close();
-			player.sendTitle(" ",languageConfig.getString("Language.Message.CreateTeam"),10,40,40);
+			player.sendTitle(" ",languageConfig.getString("Message.CreateTeam"),10,40,40);
 		}
 	}
 
@@ -39,9 +39,9 @@ public class CreateTeam implements GuiAction {
 		AllManager.playerUUID_chat_Map.put(uuid, false);
 		FileConfiguration teamConfig = FileConfig.config_Map.get("team.yml");
 		if(teamConfig.contains(teamName)){
-			player.sendTitle(" ",languageConfig.getString("Language.Message.CreateSameName"),10,40,40);
+			player.sendTitle(" ",languageConfig.getString("Message.CreateSameName"),10,40,40);
 		}else {
-			player.sendMessage(languageConfig.getString("Language.Message.CreateSuccess").replace("%team_name%", teamName));
+			player.sendMessage(languageConfig.getString("Message.CreateSuccess").replace("%team_name%", teamName));
 			FTeam team = new FTeam(player, teamName);
 			AllManager.teamName_FTeam_Map.put(teamName, team);
 			//設置隊伍設定

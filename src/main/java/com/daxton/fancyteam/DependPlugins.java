@@ -1,9 +1,11 @@
 package com.daxton.fancyteam;
 
 
-import com.daxton.fancyteam.listener.MythicMobListener;
+import com.daxton.fancyteam.listener.FancyMobListener;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+
+import static com.daxton.fancyteam.config.FileConfig.languageConfig;
+
 
 public class DependPlugins {
 
@@ -12,22 +14,16 @@ public class DependPlugins {
         FancyTeam fancyTeam = FancyTeam.fancyTeam;
 
         if (Bukkit.getServer().getPluginManager().getPlugin("FancyCore") != null && Bukkit.getPluginManager().isPluginEnabled("FancyCore")){
-            fancyTeam.getLogger().info(ChatColor.GREEN+"Loaded FancyCore");
+            fancyTeam.getLogger().info(languageConfig.getString("LogMessage.LoadFancyCore"));
         }else {
-            fancyTeam.getLogger().severe("*** FancyCore is not installed or not enabled. ***");
-            fancyTeam.getLogger().severe("*** FancyTeam will be disabled. ***");
-            fancyTeam.getLogger().severe("*** FancyCore未安裝或未啟用。 ***");
-            fancyTeam.getLogger().severe("*** FancyTeam將被卸載。 ***");
+            languageConfig.getStringList("LogMessage.UnLoadFancyCore").forEach(message-> fancyTeam.getLogger().info(message));
             return false;
         }
-        if (Bukkit.getServer().getPluginManager().getPlugin("MythicMobs") != null) {
-            fancyTeam.getLogger().info(ChatColor.GREEN+"Loaded MythicMobs");
-            Bukkit.getPluginManager().registerEvents(new MythicMobListener(), fancyTeam);
+        if (Bukkit.getServer().getPluginManager().getPlugin("FancyMobs") != null && Bukkit.getPluginManager().isPluginEnabled("FancyMobs")) {
+            fancyTeam.getLogger().info(languageConfig.getString("LogMessage.LoadFancyMobs"));
+            Bukkit.getPluginManager().registerEvents(new FancyMobListener(), fancyTeam);
         }else {
-            fancyTeam.getLogger().severe("*** MythicMobs is not installed or not enabled. ***");
-            fancyTeam.getLogger().severe("*** FancyTeam will be disabled. ***");
-            fancyTeam.getLogger().severe("*** MythicMobs未安裝或未啟用。 ***");
-            fancyTeam.getLogger().severe("*** FancyTeam將被卸載。 ***");
+            languageConfig.getStringList("LogMessage.UnLoadFancyMobs").forEach(message-> fancyTeam.getLogger().info(message));
             return false;
         }
 
