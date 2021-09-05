@@ -1,6 +1,7 @@
 package com.daxton.fancyteam.api.team;
 
 import com.daxton.fancycore.api.gui.GUI;
+import com.daxton.fancyteam.FancyTeam;
 import com.daxton.fancyteam.config.TeamConfig;
 import com.daxton.fancyteam.gui.MainTeam;
 import com.daxton.fancyteam.listener.PlayerListener;
@@ -81,19 +82,13 @@ public class FTeam extends FTeamSetting{
 		offlinePlayers.remove(uuid);
 		AllManager.playerUUID_team_Map.remove(uuid);
 		if(uuid.equals(leader)){
-			leader = null;
-			if(onlinePlayers.size() > 0){
-				leader = onlinePlayers.stream().findAny().get();
-			}else if(offlinePlayers.size() > 0){
-				leader = offlinePlayers.stream().findAny().get();
-			}
-			if(leader == null){
-				disbandTeam();
-			}
+			disbandTeam();
+		}else {
+			TeamConfig.setTeamConfig(this);
 		}
 		//移除玩家設定
 		TeamConfig.removePlayerData(uuid);
-		TeamConfig.setTeamConfig(this);
+
 		PlayerListener.onTeamChange();
 	}
 	//解散隊伍
@@ -105,7 +100,7 @@ public class FTeam extends FTeamSetting{
 			if(AllManager.playerUUID_GUI_Map.get(uuid) != null){
 				GUI gui = AllManager.playerUUID_GUI_Map.get(uuid);
 				if(gui.isOpen()){
-					MainTeam.open(player);
+					MainTeam.noTeam(gui, player);
 				}
 			}
 		});

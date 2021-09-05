@@ -1,7 +1,7 @@
 package com.daxton.fancyteam.gui.base;
 
 import com.daxton.fancycore.api.gui.GUI;
-import com.daxton.fancycore.api.gui.GuiAction;
+import com.daxton.fancycore.api.gui.button.GuiAction;
 import com.daxton.fancyteam.api.team.FTeam;
 import com.daxton.fancyteam.config.TeamConfig;
 import org.bukkit.entity.Player;

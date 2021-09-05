@@ -8,6 +8,7 @@ import com.daxton.fancyteam.api.check.OnLineTeamCheck;
 import com.daxton.fancyteam.api.get.OnLineTeamGet;
 import com.daxton.fancyteam.api.teamenum.AllotType;
 import com.daxton.fancyteam.config.FileConfig;
+import com.daxton.fancyteam.gui.HaveTeam;
 import com.daxton.fancyteam.gui.base.CreateTeam;
 import com.daxton.fancyteam.gui.MainTeam;
 import com.daxton.fancyteam.manager.AllManager;
@@ -40,13 +41,8 @@ public class PlayerListener implements Listener {
     @EventHandler//當玩家登入
     public void onPlayerJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
-
-        AllManager.playerUUID_chat_Map.put(uuid, false);
         TeamStates.onLine(player);
         PlayerListener.onOnLinePlaeyrChange();
-
-
     }
     @EventHandler//當玩家登出
     public void onPlayerQuit(PlayerQuitEvent event){
@@ -59,21 +55,6 @@ public class PlayerListener implements Listener {
         PlayerListener.onOnLinePlaeyrChange();
     }
 
-    @EventHandler//玩家聊天監聽
-    public void onPlayerChat(PlayerChatEvent event){
-        Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
-        if(AllManager.playerUUID_chat_Map.get(uuid)){
-            event.setCancelled(true);
-            String chatString = event.getMessage();
-            GUI gui = AllManager.playerUUID_GUI_Map.get(uuid);
-            if(gui.getAction(1, 1) != null){
-                CreateTeam createTeam = (CreateTeam) gui.getAction(1, 1);
-                createTeam.chat(chatString);
-            }
-
-        }
-    }
     @EventHandler(priority = EventPriority.LOW)//攻擊
     public void onPhysicalDamage(EntityDamageByEntityEvent event){
         Entity attacker = event.getDamager();
@@ -116,7 +97,11 @@ public class PlayerListener implements Listener {
             if(AllManager.playerUUID_GUI_Map.get(uuid) != null){
                 GUI gui = AllManager.playerUUID_GUI_Map.get(uuid);
                 if(gui.isOpen()){
-                    MainTeam.open(player);
+                    if(AllManager.playerUUID_team_Map.get(uuid) == null){
+                        MainTeam.noTeam(gui, player);
+                    }else {
+                        HaveTeam.haveTeam(gui, player);
+                    }
                 }
             }
         });

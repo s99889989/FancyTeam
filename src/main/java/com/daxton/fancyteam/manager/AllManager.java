@@ -14,8 +14,6 @@ public class AllManager {
 	public static Map<String, FTeam> teamName_FTeam_Map = new HashMap<>();
 	//玩家隊伍 PlayerUUID Team
 	public static Map<UUID, String> playerUUID_team_Map = new HashMap<>();
-	//PlayerUUID boolean，玩家對話輸入
-	public static Map<UUID, Boolean> playerUUID_chat_Map = new HashMap<>();
 	//玩家無隊伍列表
 	public static Map<UUID, String> playerUUID_List_Map = new HashMap<>();
 	//隊伍邀請列表

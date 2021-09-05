@@ -1,7 +1,9 @@
 package com.daxton.fancyteam.gui.base;
 
-import com.daxton.fancycore.api.gui.GuiAction;
+import com.daxton.fancycore.api.gui.GUI;
+import com.daxton.fancycore.api.gui.button.GuiAction;
 import com.daxton.fancyteam.api.team.FTeam;
+import com.daxton.fancyteam.gui.HaveTeam;
 import com.daxton.fancyteam.gui.MainTeam;
 import com.daxton.fancyteam.manager.AllManager;
 import org.bukkit.entity.Player;
@@ -32,8 +34,13 @@ public class InvitePlayers implements GuiAction {
 				inviteList.add(fTeam.getTeamName());
 				AllManager.playerUUID_inviteList_Map.put(inviteUUID, inviteList);
 				fTeam.addInvitePlayer(inviteUUID);
-				MainTeam.open(player);
-				MainTeam.open(invitePlayer);
+
+				GUI selfGui = AllManager.playerUUID_GUI_Map.get(player.getUniqueId());
+				HaveTeam.haveTeam(selfGui, player);
+				GUI inviteGui = AllManager.playerUUID_GUI_Map.get(invitePlayer.getUniqueId());
+				if(inviteGui != null){
+					MainTeam.noTeam(inviteGui, invitePlayer);
+				}
 			}else {
 				player.sendMessage(languageConfig.getString("Message.AlreadyInvited")+"");
 			}

@@ -1,6 +1,6 @@
 package com.daxton.fancyteam.listener;
 
-import com.daxton.fancycore.api.hook.Vault.Currency;
+import com.daxton.fancycore.hook.Vault.Currency;
 import com.daxton.fancymobs.api.event.FancyMobDeathEvent;
 import com.daxton.fancyteam.api.AllotThing;
 
@@ -11,7 +11,7 @@ import com.daxton.fancyteam.api.team.FTeam;
 import com.daxton.fancyteam.config.FileConfig;
 import com.daxton.fancyteam.gui.MainTeam;
 import com.google.common.collect.Lists;
-import org.bukkit.Bukkit;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

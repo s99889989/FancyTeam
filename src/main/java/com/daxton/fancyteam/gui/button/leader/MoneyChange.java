@@ -1,12 +1,15 @@
-package com.daxton.fancyteam.gui.setting;
+package com.daxton.fancyteam.gui.button.leader;
 
 import com.daxton.fancycore.api.gui.GUI;
-import com.daxton.fancycore.api.gui.GuiAction;
+import com.daxton.fancycore.api.gui.button.GuiAction;
+import com.daxton.fancycore.api.gui.button.GuiButton;
+import com.daxton.fancycore.api.gui.item.GuiItem;
 import com.daxton.fancyteam.api.team.FTeam;
-import com.daxton.fancyteam.gui.MainTeam;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
+
+import static com.daxton.fancyteam.config.FileConfig.languageConfig;
 
 public class MoneyChange implements GuiAction {
 
@@ -26,7 +29,14 @@ public class MoneyChange implements GuiAction {
 	public void execute(ClickType clickType, InventoryAction action, int slot){
 		if(clickType == ClickType.LEFT){
 			fTeam.setMoneyNext();
-			MainTeam.open(player);
+
+			String money = fTeam.getMoney().toString();
+			GuiButton moneyChangeButton = GuiButton.ButtonBuilder.getInstance().
+				setItemStack(GuiItem.valueOf(languageConfig,"Gui.SettingTeam.Money."+money)).
+				setGuiAction(new MoneyChange(gui, player, fTeam)).
+				build();
+			gui.setButton(moneyChangeButton, 1, 5);
+
 		}
 	}
 

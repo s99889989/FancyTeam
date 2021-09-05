@@ -11,6 +11,7 @@ public class HaveTeam {
 
 	//有隊伍時
 	public static void haveTeam(GUI gui, Player player){
+		gui.clearButtonFrom(1, 54);
 		UUID uuid = player.getUniqueId();
 		String teamName = AllManager.playerUUID_team_Map.get(uuid);
 		FTeam team = AllManager.teamName_FTeam_Map.get(teamName);

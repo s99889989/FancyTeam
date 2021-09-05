@@ -1,8 +1,7 @@
 package com.daxton.fancyteam.gui.base;
 
 import com.daxton.fancycore.api.gui.GUI;
-import com.daxton.fancycore.api.gui.GuiAction;
-import com.daxton.fancyteam.manager.AllManager;
+import com.daxton.fancycore.api.gui.button.GuiAction;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;

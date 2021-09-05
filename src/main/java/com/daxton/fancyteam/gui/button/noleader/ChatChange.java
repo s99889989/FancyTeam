@@ -1,12 +1,15 @@
-package com.daxton.fancyteam.gui.setting;
+package com.daxton.fancyteam.gui.button.noleader;
 
 import com.daxton.fancycore.api.gui.GUI;
-import com.daxton.fancycore.api.gui.GuiAction;
+import com.daxton.fancycore.api.gui.button.GuiAction;
+import com.daxton.fancycore.api.gui.button.GuiButton;
+import com.daxton.fancycore.api.gui.item.GuiItem;
 import com.daxton.fancyteam.api.team.FTeam;
-import com.daxton.fancyteam.gui.MainTeam;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
+
+import static com.daxton.fancyteam.config.FileConfig.languageConfig;
 
 public class ChatChange implements GuiAction {
 
@@ -22,11 +25,17 @@ public class ChatChange implements GuiAction {
 		this.uuidString = player.getUniqueId().toString();
 	}
 
-	//改變經驗設定
+	//切換隊伍聊天
 	public void execute(ClickType clickType, InventoryAction action, int slot){
 		if(clickType == ClickType.LEFT){
 			fTeam.setTeam_Chat(player, !fTeam.isTeam_Chat(player));
-			MainTeam.open(player);
+
+			boolean teamChat = fTeam.isTeam_Chat(player);
+			GuiButton chatChangeButton = GuiButton.ButtonBuilder.getInstance().
+				setItemStack(GuiItem.valueOf(languageConfig,"Gui.SettingTeam.TeamChat."+teamChat)).
+				setGuiAction(this).
+				build();
+			gui.setButton(chatChangeButton, 1, 1);
 		}
 	}
 

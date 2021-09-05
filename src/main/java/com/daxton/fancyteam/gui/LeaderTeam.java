@@ -1,68 +1,96 @@
 package com.daxton.fancyteam.gui;
 
 import com.daxton.fancycore.api.gui.GUI;
-import com.daxton.fancycore.api.gui.GuiButtom;
+import com.daxton.fancycore.api.gui.button.GuiButton;
+import com.daxton.fancycore.api.gui.item.GuiItem;
 import com.daxton.fancycore.api.item.ItemSet;
 import com.daxton.fancyteam.api.team.FTeam;
 import com.daxton.fancyteam.api.teamenum.TeamListType;
 import com.daxton.fancyteam.gui.base.*;
-import com.daxton.fancyteam.gui.setting.*;
+import com.daxton.fancyteam.gui.button.leader.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.daxton.fancyteam.config.FileConfig.languageConfig;
 
 public class LeaderTeam {
 
 	//隊長
-	public static void teamLeader(GUI gui, Player player, FTeam team){
+	public static void teamLeader(GUI gui, Player player, FTeam fTeam){
 		//顯示列表
-		String teamListType = team.getTeamListType().toString();
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.Main.TeamList."+teamListType), false,1, 1);
-		gui.setAction(new TeamTypeChange(gui, player, team), 1, 1);
+		String teamListType = fTeam.getTeamListType().toString();
+
+		GuiButton teamTypeChangeButton = GuiButton.ButtonBuilder.getInstance().
+			setItemStack(GuiItem.valueOf(languageConfig,"Gui.Main.TeamList."+teamListType)).
+			setGuiAction(new TeamTypeChange(gui, player, fTeam)).
+			build();
+		gui.setButton(teamTypeChangeButton, 1, 1);
+
 		//切換隊伍聊天
-		boolean teamChat = team.isTeam_Chat(player);
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.SettingTeam.TeamChat."+teamChat), false,1, 2);
-		gui.setAction(new ChatChange(gui, player, team), 1, 2);
+		boolean teamChat = fTeam.isTeam_Chat(player);
+		GuiButton chatChangeButton = GuiButton.ButtonBuilder.getInstance().
+			setItemStack(GuiItem.valueOf(languageConfig,"Gui.SettingTeam.TeamChat."+teamChat)).
+			setGuiAction(new ChatChange(gui, player, fTeam)).
+			build();
+		gui.setButton(chatChangeButton, 1, 2);
 		//經驗
-		String experience = team.getExperience().toString();
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.SettingTeam.Experience."+experience), false,1, 3);
-		gui.setAction(new ExperienceChange(gui, player, team), 1, 3);
+		String experience = fTeam.getExperience().toString();
+		GuiButton experienceChangeButton = GuiButton.ButtonBuilder.getInstance().
+			setItemStack(GuiItem.valueOf(languageConfig,"Gui.SettingTeam.Experience."+experience)).
+			setGuiAction(new ExperienceChange(gui, player, fTeam)).
+			build();
+		gui.setButton(experienceChangeButton, 1, 3);
 		//物品
-		String item = team.getItem().toString();
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.SettingTeam.Item."+item), false,1, 4);
-		gui.setAction(new ItemChange(gui, player, team), 1, 4);
+		String item = fTeam.getItem().toString();
+		GuiButton itemChangeButton = GuiButton.ButtonBuilder.getInstance().
+			setItemStack(GuiItem.valueOf(languageConfig,"Gui.SettingTeam.Item."+item)).
+			setGuiAction(new ItemChange(gui, player, fTeam)).
+			build();
+		gui.setButton(itemChangeButton, 1, 4);
 		//金錢
-		String money = team.getMoney().toString();
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.SettingTeam.Money."+money), false,1, 5);
-		gui.setAction(new MoneyChange(gui, player, team), 1, 5);
+		String money = fTeam.getMoney().toString();
+		GuiButton moneyChangeButton = GuiButton.ButtonBuilder.getInstance().
+			setItemStack(GuiItem.valueOf(languageConfig,"Gui.SettingTeam.Money."+money)).
+			setGuiAction(new MoneyChange(gui, player, fTeam)).
+			build();
+		gui.setButton(moneyChangeButton, 1, 5);
 		//攻擊隊友
-		String damage = String.valueOf(team.isDamageTeamPlayer());
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.SettingTeam.AttackTeammate."+damage), false,1, 6);
-		gui.setAction(new DamageChange(gui, player, team), 1, 6);
+		String damage = String.valueOf(fTeam.isDamageTeamPlayer());
+		GuiButton damageChangeButton = GuiButton.ButtonBuilder.getInstance().
+			setItemStack(GuiItem.valueOf(languageConfig,"Gui.SettingTeam.AttackTeammate."+damage)).
+			setGuiAction(new DamageChange(gui, player, fTeam)).
+			build();
+		gui.setButton(damageChangeButton, 1, 6);
 		//自動加入隊伍
-		String autoJon = String.valueOf(team.isAutoJoin());
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.SettingTeam.AgreeJoin."+autoJon), false,1, 7);
-		gui.setAction(new AutoJoinChange(gui, player, team), 1, 7);
+		String autoJon = String.valueOf(fTeam.isAutoJoin());
+		GuiButton autoJoinChangeButton = GuiButton.ButtonBuilder.getInstance().
+			setItemStack(GuiItem.valueOf(languageConfig,"Gui.SettingTeam.AgreeJoin."+autoJon)).
+			setGuiAction(new AutoJoinChange(gui, player, fTeam)).
+			build();
+		gui.setButton(autoJoinChangeButton, 1, 7);
 		//離開隊伍
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.Main.LeaveTeam"), false,1, 8);
-		gui.setAction(new LeaveTeam(player, team), 1, 8);
+		GuiButton leaveTeamButton = GuiButton.ButtonBuilder.getInstance().
+			setItemStack(GuiItem.valueOf(languageConfig,"Gui.Main.LeaveTeam")).
+			setGuiAction(new LeaveTeam(player, fTeam)).
+			build();
+		gui.setButton(leaveTeamButton, 1, 8);
 		//解散隊伍
-		gui.setItem(GuiButtom.valueOf(languageConfig,"Gui.Main.DisbandTeam"), false,1, 9);
-		gui.setAction(new DisbandTeam(gui, player, team), 1, 9);
+		GuiButton disbandTeamButton = GuiButton.ButtonBuilder.getInstance().
+			setItemStack(GuiItem.valueOf(languageConfig,"Gui.Main.DisbandTeam")).
+			setGuiAction(new DisbandTeam(gui, player, fTeam)).
+			build();
+		gui.setButton(disbandTeamButton, 1, 9);
 		//隊友列表
-		playerListLeader(player, gui, team);
+		playerListLeader(player, gui, fTeam);
 
 	}
 
 	//隊長用隊友列表
 	public static void playerListLeader(Player inPlayer, GUI gui, FTeam fTeam){
+		gui.clearButtonFrom(10, 54);
 		TeamListType teamListType = fTeam.getTeamListType();
 		//隊友
 		if(teamListType == TeamListType.TeamPlayers){
@@ -79,47 +107,63 @@ public class LeaderTeam {
 	}
 	//隊友
 	public static void teamList(GUI gui, FTeam fTeam){
-		ItemStack teamItem = GuiButtom.valueOf(languageConfig,"Gui.Main.KickPlayer");
-		List<Integer> ignore = new ArrayList<>();
+		ItemStack teamItem = GuiItem.valueOf(languageConfig,"Gui.Main.KickPlayer");
+		Integer[] ignore = new Integer[]{};
 		fTeam.getOnLinePlayers().forEach(uuid -> {
 			Player p = Bukkit.getPlayer(uuid);
 			ItemSet.setDisplayName(teamItem, languageConfig.getString("Message.OnLine").replace("%player_name%", p.getName()));
 			ItemSet.setHeadValue(teamItem, p.getName());
-			gui.addItem(teamItem, false, 10, 54, ignore);
-			gui.addAction(new KickPlayer(fTeam, uuid), 10, 54, ignore);
+
+			GuiButton kickPlayerButton = GuiButton.ButtonBuilder.getInstance().
+				setItemStack(teamItem).
+				setGuiAction(new KickPlayer(fTeam, uuid)).
+				build();
+			gui.addButton(kickPlayerButton, 10, 54, ignore);
 		});
 		fTeam.getOffLinePlayers().forEach(uuid -> {
 			OfflinePlayer p = Bukkit.getOfflinePlayer(uuid);
 			ItemSet.setDisplayName(teamItem, languageConfig.getString("Message.OffLine").replace("%player_name%", p.getName()));
 			ItemSet.setHeadValue(teamItem, p.getName());
-			gui.addItem(teamItem, false, 10, 54, ignore);
-			gui.addAction(new KickPlayer(fTeam, uuid), 10, 54, ignore);
+
+			GuiButton kickPlayerButton = GuiButton.ButtonBuilder.getInstance().
+				setItemStack(teamItem).
+				setGuiAction(new KickPlayer(fTeam, uuid)).
+				build();
+			gui.addButton(kickPlayerButton, 10, 54, ignore);
 		});
 	}
 	//線上可以邀請的玩家
 	public static void inviteList(GUI gui, FTeam fTeam, Player inPlayer){
 		ItemStack teamItem = new ItemStack(Material.PLAYER_HEAD);
-		List<Integer> ignore = new ArrayList<>();
+		Integer[] ignore = new Integer[]{};
 		Bukkit.getOnlinePlayers().forEach(player -> {
 			if(!fTeam.isTeamPlayer(player) && !fTeam.isApplyPlayer(player)){
 				ItemSet.setDisplayName(teamItem, player.getName());
 				ItemSet.setHeadValue(teamItem, player.getName());
-				gui.addItem(teamItem, false, 10, 54, ignore);
-				gui.addAction(new InvitePlayers(inPlayer, fTeam, player), 10, 54, ignore);
+
+				GuiButton kickPlayerButton = GuiButton.ButtonBuilder.getInstance().
+					setItemStack(teamItem).
+					setGuiAction(new InvitePlayers(inPlayer, fTeam, player)).
+					build();
+				gui.addButton(kickPlayerButton, 10, 54, ignore);
 			}
 		});
 	}
 	//申請加入的玩家
 	public static void applyList(GUI gui, FTeam fTeam, Player inPlayer){
 		ItemStack teamItem = new ItemStack(Material.PLAYER_HEAD);
-		List<Integer> ignore = new ArrayList<>();
+		Integer[] ignore = new Integer[]{};
 		fTeam.getApplyPlayers().forEach(uuid -> {
 			OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
 			String playerName = offlinePlayer.getName();
 			ItemSet.setDisplayName(teamItem, playerName);
 			ItemSet.setHeadValue(teamItem, playerName);
-			gui.addItem(teamItem, false, 10, 54, ignore);
-			gui.addAction(new AgreeJoin(inPlayer, fTeam, offlinePlayer.getUniqueId()), 10, 54, ignore);
+
+			GuiButton agreeJoinButton = GuiButton.ButtonBuilder.getInstance().
+				setItemStack(teamItem).
+				setGuiAction(new AgreeJoin(inPlayer, fTeam, offlinePlayer.getUniqueId())).
+				build();
+			gui.addButton(agreeJoinButton, 10, 54, ignore);
 		});
 	}
 

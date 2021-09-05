@@ -1,12 +1,15 @@
-package com.daxton.fancyteam.gui.setting;
+package com.daxton.fancyteam.gui.button.leader;
 
 import com.daxton.fancycore.api.gui.GUI;
-import com.daxton.fancycore.api.gui.GuiAction;
+import com.daxton.fancycore.api.gui.button.GuiAction;
+import com.daxton.fancycore.api.gui.button.GuiButton;
+import com.daxton.fancycore.api.gui.item.GuiItem;
 import com.daxton.fancyteam.api.team.FTeam;
-import com.daxton.fancyteam.gui.MainTeam;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
+
+import static com.daxton.fancyteam.config.FileConfig.languageConfig;
 
 public class ExperienceChange implements GuiAction {
 
@@ -26,7 +29,15 @@ public class ExperienceChange implements GuiAction {
 	public void execute(ClickType clickType, InventoryAction action, int slot){
 		if(clickType == ClickType.LEFT){
 			fTeam.setExperienceNext();
-			MainTeam.open(player);
+
+			String experience = fTeam.getExperience().toString();
+
+			GuiButton experienceChangeButton = GuiButton.ButtonBuilder.getInstance().
+				setItemStack(GuiItem.valueOf(languageConfig,"Gui.SettingTeam.Experience."+experience)).
+				setGuiAction(new ExperienceChange(gui, player, fTeam)).
+				build();
+			gui.setButton(experienceChangeButton, 1, 3);
+
 		}
 	}
 

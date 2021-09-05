@@ -1,6 +1,7 @@
 package com.daxton.fancyteam.gui.noTeam;
 
-import com.daxton.fancycore.api.gui.GuiAction;
+import com.daxton.fancycore.api.gui.GUI;
+import com.daxton.fancycore.api.gui.button.GuiAction;
 import com.daxton.fancyteam.gui.MainTeam;
 import com.daxton.fancyteam.manager.AllManager;
 import org.bukkit.entity.Player;
@@ -11,11 +12,14 @@ import java.util.UUID;
 
 public class NoTeamListChange implements GuiAction {
 
-	private final Player player;
-	private final UUID uuid;
+	final Player player;
+	final GUI gui;
+	final UUID uuid;
 
-	public NoTeamListChange(Player player){
+
+	public NoTeamListChange(Player player, GUI gui){
 		this.player = player;
+		this.gui = gui;
 		this.uuid= player.getUniqueId();
 	}
 
@@ -28,7 +32,7 @@ public class NoTeamListChange implements GuiAction {
 			}else if(noTeamList.equals("JoinTeamList")){
 				AllManager.playerUUID_List_Map.put(uuid, "InviteTimeList");
 			}
-			MainTeam.open(player);
+			MainTeam.noTeam(gui, player);
 		}
 	}
 
